@@ -11,7 +11,11 @@ with open (corpus_file, 'r') as f:
 with open (coded_file, 'r') as c:
     coded_text = c.read().lower()
 
-# trynna see if decryption works
-fake_key = 'qwertyuiopasdfghjklzxcvbnm'
-try1 = frequency.decryption (coded_text, fake_key)
-print(try1)
+# let's see with this approach what we get
+real_freq = frequency.frequencies(corpus_text)
+c_freq = frequency.frequencies(coded_text)
+
+first_key = frequency.keys(real_freq, c_freq)
+first_plaintext = frequency.decryption(coded_text, first_key)
+
+print(first_plaintext[:100])
