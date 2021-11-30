@@ -1,4 +1,5 @@
 import re
+import string
 # this module allows us to make computations with text
 # add link documentation
 
@@ -35,7 +36,7 @@ def frequencies(text_file):
 
 def keys(sorted_freq_corpus, sorted_freq_cipher):
 
-    alphabet= "abcdefghijklmnopqrstvuxywz"
+    alphabet= string.ascii_lowercase
     dec_key = ''
 
     for alpha in alphabet:
