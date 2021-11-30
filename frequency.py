@@ -3,12 +3,12 @@ import re
 # add link documentation
 
 def clean(text_file):
-    
-    second_to_be_removed = "[^a-z]" #this refers to each non alphabetical character (the ^ stands for a negation)
-    first_tbr = "\n" 
 
-    text_file = re.sub(second_to_be_removed, " ", text_file)
-    text_file = re.sub(first_tbr, " ", text_file) #removes the \n and replace them it with a blank space. 
+    first_tbr = "\n"
+    second_to_be_removed = "[^a-z]" #this refers to each non alphabetical character (the ^ stands for a negation)
+     
+    text_file = re.sub(first_tbr, " ", text_file)
+    text_file = re.sub(second_to_be_removed, " ", text_file) #removes the \n and replace them it with a blank space. 
 
     return text_file
 
