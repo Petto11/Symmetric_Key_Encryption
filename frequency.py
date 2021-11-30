@@ -1,4 +1,5 @@
 import re
+import string
 # this module allows us to make computations with text
 # add link documentation
 
@@ -32,34 +33,22 @@ def frequencies(text_file):
         else:
             freq_dict[character]+= 1
 
+
     freq_dict = dict(sorted(freq_dict.items(),key=lambda x:x[1],reverse=True))
 
     return freq_dict
 
+def keys(sorted_freq_corpus, sorted_freq_cipher):
 
-def decryption(cipher_text, key):
+    alphabet= string.ascii_lowercase
+    dec_key = ''
 
-    #I initialize an empty plaintext as base
-    plaintext = ''
+    for alpha in alphabet:
 
-    alphabet = string.ascii_lowercase
+        for i,j in zip(sorted_freq_cipher, sorted_freq_corpus):
 
-    # I associate to each alphabet character the corresponding
-    # 'decodification character'
-    dict = {i:j for i,j in zip (alphabet, key)}
+            if alpha==i:
 
-    for char in cipher_text:
+                dec_key+=j
 
-        # if the character is not in the alphabet there's no
-        # need to substitute it
-        if char not in dict.keys():
-            plaintext +=char
-            continue
-
-        for i,j in dict.items():
-
-            if char == i:
-                plaintext +=j
-                break
-
-    return plaintext
+    return dec_key
