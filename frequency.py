@@ -7,6 +7,10 @@ import string
 # CLEANING TEXT
 def clean(text_file):
 
+    #just for the test - to be changed
+    if len(text_file)==0:
+         return None 
+
     #the first thing that we'll remove is the pattern '\n'
     first_tbr = "\n"
 
@@ -42,6 +46,9 @@ def frequencies(text_file):
 
 # COMPUTING THE KEY
 def keys(sorted_freq_corpus, sorted_freq_cipher):
+
+    if len(sorted_freq_corpus) | len(sorted_freq_cipher) > 26:
+        return None
 
     alphabet= string.ascii_lowercase
     dec_key = ''
