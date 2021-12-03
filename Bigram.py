@@ -21,9 +21,9 @@ def bigram_freq(text_file):
     for word in words:
         for index in range(0,len(word)-1):
             bigram = word[index : index+2]
-            if bigram not in bigram_freq_dict: 
+            if bigram not in bigram_freq_dict:
                 bigram_freq_dict[bigram]=1
-            else: 
+            else:
                 bigram_freq_dict[bigram]+=1
 # calculating the score of bigrams
     tot = sum(bigram_freq_dict.values())
@@ -33,12 +33,12 @@ def bigram_freq(text_file):
     bigram_freq_dict = dict(sorted( bigram_freq_dict.items(), key=lambda x:x[1] , reverse=True))
     return bigram_freq_dict
 
-Def scoring(text,coprus_bg): 
+def scoring(text,coprus_bg):
     Bg=present_bigrams(text) 
     Score=0
     for bigram in bg:
         if bigram in corpus_bg.keys():
-            score+=corpus_bg[bigram] 
+            score+=corpus_bg[bigram]
         else:
-            score+=min(corpus_bg.values()) 
+            score+=min(corpus_bg.values())
     return score
