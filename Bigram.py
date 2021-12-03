@@ -32,3 +32,13 @@ def bigram_freq(text_file):
         # sorting
     bigram_freq_dict = dict(sorted( bigram_freq_dict.items(), key=lambda x:x[1] , reverse=True))
     return bigram_freq_dict
+
+Def scoring(text,coprus_bg): 
+    Bg=present_bigrams(text) 
+    Score=0
+    for bigram in bg:
+        if bigram in corpus_bg.keys():
+            score+=corpus_bg[bigram] 
+        else:
+            score+=min(corpus_bg.values()) 
+    return score
