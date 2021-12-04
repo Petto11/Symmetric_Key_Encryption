@@ -33,7 +33,7 @@ def bigram_freq(text_file):
     bigram_freq_dict = dict(sorted( bigram_freq_dict.items(), key=lambda x:x[1] , reverse=True))
     return bigram_freq_dict
 
-def scoring(text,coprus_bg):
+def scoring(text,corpus_bg):
     Bg=present_bigrams(text) 
     Score=0
     for bigram in bg:
@@ -42,3 +42,21 @@ def scoring(text,coprus_bg):
         else:
             score+=min(corpus_bg.values())
     return score
+
+def Permute(key):
+
+    permutations = list(itertools.permutations(key[::-1],2))
+    keys = []
+
+    #transforming the key intro string for simplicity
+    str_key = ''
+    for i in key:
+        str_key+=i
+
+    for one,two in permutations:
+        temp = str_key
+        temp = swap(temp,one,two)
+        if temp not in keys:
+            keys += [temp]
+
+    return keys
