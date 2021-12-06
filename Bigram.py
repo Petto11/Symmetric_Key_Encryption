@@ -34,7 +34,7 @@ def bigram_freq(text_file):
     return bigram_freq_dict
 
 def scoring(text,corpus_bg):
-    Bg=present_bigrams(text) 
+    Bg=present_bigrams(text)
     Score=0
     for bigram in bg:
         if bigram in corpus_bg.keys():
@@ -42,7 +42,7 @@ def scoring(text,corpus_bg):
         else:
             score+=min(corpus_bg.values())
     return score
-  
+
  def swap (string, first_char, second_char):
 
     first_pos = None
@@ -86,5 +86,49 @@ def Permute(key):
 
     return keys
 
-    
+def brute_force(ciphertext, starting_key, corpus_bg, attempts, actual_digest):
 
+    max_score=-2000
+    all_keys = []
+    candidate_plaintext = decryption(ciphertext, starting_key)
+
+    best_key = starting_key
+
+    for i in range(attempts):
+
+        list_keys = Permute(best_key)
+        best_candidate = candidate_plaintext
+
+        for idx, key in enumerate(list_keys):
+
+
+            candidate_plaintext = decryption(ciphertext, key)
+            new_bg = bigram_freq(candidate_plaintext)
+
+            #attribuisco ai bigram del nuovo candidate i benchmark score
+            score=0
+            for bigram in new_bg:
+                if bigram in corpus_bg.keys():
+                    score+= corpus_bg[bigram]
+                else:
+                    score+=min(corpus_bg.values())
+
+            #if we find a better score, then we reassign three variables:
+            # the key, the score and the plaintext
+            if score > max_score:
+
+                best_key = key
+                max_score=score
+                best_candidate = candidate_plaintext
+
+                digest = hashlib.sha256(best_candidate.encode('utf-8')).hexdigest()
+                print(score, digest)
+                #in the lucky case in which we find the real digest, we return the
+                # current result
+                if digest==actual_digest:
+                    print('\n Found! \n')
+                    return best_key, best_candidate[:10000]
+
+                break
+
+    return best_key, best_candidate[:10000]
