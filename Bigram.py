@@ -42,3 +42,28 @@ def scoring(text,coprus_bg):
         else:
             score+=min(corpus_bg.values())
     return score
+    
+ def swap (string, first_char, second_char):
+
+    first_pos = None
+    second_pos = None
+
+    for idx, char in enumerate(string):
+
+        if char==first_char:
+            first_pos=idx
+        if char==second_char:
+            second_pos=idx
+
+    res = ''
+
+    for idx,char in enumerate(string):
+
+        if idx==first_pos:
+            res+=second_char
+        elif idx==second_pos:
+            res+=first_char
+        else:
+            res+=char
+
+    return res
