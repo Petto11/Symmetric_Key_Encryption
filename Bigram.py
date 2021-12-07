@@ -86,7 +86,7 @@ def Permute(key):
 
     return keys
 
-def brute_force(ciphertext, starting_key, corpus_bg, attempts, actual_digest):
+def brute_force(ciphertext, starting_key, corpus_bg, attempts, n_char):
 
     max_score=-2000
     all_keys = []
@@ -121,14 +121,4 @@ def brute_force(ciphertext, starting_key, corpus_bg, attempts, actual_digest):
                 max_score=score
                 best_candidate = candidate_plaintext
 
-                digest = hashlib.sha256(best_candidate.encode('utf-8')).hexdigest()
-                print(score, digest)
-                #in the lucky case in which we find the real digest, we return the
-                # current result
-                if digest==actual_digest:
-                    print('\n Found! \n')
-                    return best_key, best_candidate[:10000]
-
-                break
-
-    return best_key, best_candidate[:10000]
+    return best_key, best_candidate[:n_char]
