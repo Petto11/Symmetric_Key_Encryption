@@ -21,10 +21,6 @@ with open (args, 'r') as f:
 
 
 # let's see with this approach what we get
-real_freq = frequency.frequencies(corpus_text)
-c_freq = frequency.frequencies(cipher_text)
-
-first_key = frequency.keys(real_freq, c_freq)
-first_plaintext = frequency.decryption(coded_text, first_key)
+first_key,first_plaintext=frequency.character_frequency(corpus_text,cipher_text)
 
 print(first_plaintext[:100])
