@@ -106,3 +106,10 @@ def decryption(cipher_text, key):
                 break
 
     return plaintext
+
+def character_frequency(corpus,cipher):
+    corpus_freq=frequency(corpus)
+    cipher_freq=frequency(cipher)
+    first_key = keys(corpus_freq, cipher_freq)
+    first_plaintext = decryption(cipher, first_key)
+    return first_key,first_plaintext
