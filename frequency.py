@@ -5,16 +5,18 @@ import string
 # add documentation
 
 # CLEANING TEXT
-def clean(text_file):
+def clean(text_file
 
-    #just for the test - to be changed
-    if len(text_file)==0:
-         return None
 
-    #the first thing that we'll remove is the pattern '\n'
+    #  for the test - to be changed
+    if len(text_file) == 0:
+        return None
+
+    # the first thing that we'll remove is the pattern '\n'
     first_tbr = "\n"
 
-    '''this refers to each non alphabetical character (the ^ stands for a negation)'''
+    '''this refers to each non alphabetical character
+       (the ^ stands for a negation)'''
     second_tbr = "[^a-z]"
 
     text_file = re.sub(first_tbr, " ", text_file)
@@ -24,9 +26,14 @@ def clean(text_file):
 
 # COUNTING THE FREQUENCIES
 def frequencies(text_file):
+
+
     '''
-    This function, given as input a string, returns a dictionary which has as keys the different characters in the string and as values the number of time the character appears in the text(frequency of characters).
-    
+    This function, given as input a string, returns a dictionary
+    which has as keys the different characters in the string and
+    as values the number of time the character appears in the text
+    (frequency of characters)
+
     frequencies("hello") --> {l:2,e:1,l:1,h:1}
     '''
 
@@ -43,18 +50,18 @@ def frequencies(text_file):
 
         else:
             freq_dict[character]+= 1
-    
+
     freq_dict = dict(sorted(freq_dict.items(),key=lambda x:x[1],reverse=True))
 
     return freq_dict
 
 # COMPUTING THE KEY
 def keys(sorted_freq_corpus, sorted_freq_cipher):
-    
+
     '''
-    
+
     This function builds a key starting from the frequency of the corpus and of the cipher. It takes as input 2 lists, matches them in a dictionary and alphabetically orders keys to obtain the candidate decryption key of the encrypted text
-    
+
     '''
 
     if len(sorted_freq_corpus) >26 | len(sorted_freq_cipher) > 26:
@@ -75,11 +82,11 @@ def keys(sorted_freq_corpus, sorted_freq_cipher):
 
 # DECRYPTION
 def decryption(cipher_text, key):
-    
+
     '''
-    
+
     The decryption function takes as input the encrypted text and the decryption key built above, returning the candidate plaintext.
-    
+
     '''
 
     #I initialize an empty plaintext as base
