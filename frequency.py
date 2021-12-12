@@ -1,12 +1,12 @@
 import re
-# this module allows us to make computations with text
-# add documentation
+# this module allows us to make computations with text - add documentation
 import string
 # add documentation
 
-# CLEANING TEXT
-def clean(text_file):
 
+# Cleaning Text
+
+def clean(text_file):
 
     #  for the test - to be changed
     if len(text_file) == 0:
@@ -25,7 +25,9 @@ def clean(text_file):
 
     return text_file
 
-# COUNTING THE FREQUENCIES
+
+# Couting Frequencies
+
 def frequencies(text_file):
 
 
@@ -56,7 +58,9 @@ def frequencies(text_file):
 
     return freq_dict
 
-# COMPUTING THE KEY
+
+# Computing the key
+
 def keys(sorted_freq_corpus, sorted_freq_cipher):
 
     '''
@@ -81,7 +85,9 @@ def keys(sorted_freq_corpus, sorted_freq_cipher):
 
     return dec_key
 
-# DECRYPTION
+
+# Decryption
+
 def decryption(cipher_text, key):
 
     '''
@@ -115,9 +121,12 @@ def decryption(cipher_text, key):
 
     return plaintext
 
-def character_frequency(corpus,cipher):
+def frequency_approach(corpus,cipher):
+
     corpus_freq=frequencies(corpus)
     cipher_freq=frequencies(cipher)
+
     first_key = keys(corpus_freq, cipher_freq)
     first_plaintext = decryption(cipher, first_key)
+
     return first_key,first_plaintext
