@@ -110,9 +110,7 @@ def Permute(key):
 
 def brute_force(ciphertext, starting_key, corpus_bg, length,digest):
 
-
-    candidate_plaintext = frequency.decryption(ciphertext, starting_key)
-
+    candidate_plaintext = ciphertext
     max_score = scoring(candidate_plaintext, corpus_bg)
 
     best_key = starting_key
@@ -139,6 +137,7 @@ def brute_force(ciphertext, starting_key, corpus_bg, length,digest):
                 best_key = key
                 max_score=score
                 best_candidate = candidate_plaintext
+
                 actual_digest = hashlib.sha256(best_candidate.encode('utf-8')).hexdigest()
                 
                 if digest==actual_digest:
@@ -152,3 +151,4 @@ def brute_force(ciphertext, starting_key, corpus_bg, length,digest):
                 break
 
     return best_key, best_candidate[:length]
+
