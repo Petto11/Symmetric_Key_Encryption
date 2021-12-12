@@ -15,6 +15,7 @@ def clean(text_file):
     first_tbr = "\n"
 
     '''this refers to each non alphabetical character (the ^ stands for a negation)'''
+    
     second_tbr = "[^a-z]"
 
     text_file = re.sub(first_tbr, " ", text_file)
@@ -67,9 +68,9 @@ def keys(sorted_freq_corpus, sorted_freq_cipher):
 
         for i,j in zip(sorted_freq_cipher, sorted_freq_corpus):
 
-            if alpha==i:
+            if alpha == i:
 
-                dec_key+=j
+                dec_key += j
 
     return dec_key
 
@@ -96,7 +97,7 @@ def decryption(cipher_text, key):
         # if the character is not in the alphabet there's no
         # need to substitute it
         if char not in dict.keys():
-            plaintext +=char
+            plaintext += char
             continue
 
         for i,j in dict.items():
@@ -108,8 +109,8 @@ def decryption(cipher_text, key):
     return plaintext
 
 def character_frequency(corpus,cipher):
-    corpus_freq=frequency(corpus)
-    cipher_freq=frequency(cipher)
+    corpus_freq=frequencies(corpus)
+    cipher_freq=frequencies(cipher)
     first_key = keys(corpus_freq, cipher_freq)
     first_plaintext = decryption(cipher, first_key)
     return first_key,first_plaintext
