@@ -18,12 +18,14 @@ with open (corpus_file, 'r') as f:
     corpus_text = f.read().lower()
 with open (digest, 'r') as f:
     digest_text = f.read().lower()
+
 cipher_text = args.text.read()
-print(len(cipher_text))
 
 # let's see with this approach what we get
-first_key,first_plaintext=frequency.character_frequency(corpus_text,cipher_text)
+first_key,first_plaintext=frequency.frequency_approach(corpus_text,cipher_text)
+#print(first_plaintext[:100])
+
 if args.brute == 'Y':
     print(Bigram.brute_force(cipher_text,first_key, Bigram.bigram_freq(corpus_text), args.length,digest_text))
 else:
-    print(first_plaintext)
+    print(first_plaintext[:args.length])
