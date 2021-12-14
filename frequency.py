@@ -1,12 +1,17 @@
-import re
 # this module allows us to make computations with text - add documentation
-import string
+import re
 # add documentation
+import string
 
 
 # Cleaning Text
 
 def clean(text_file):
+
+    '''
+    The cleaning function takes as input a text and outputs the 
+    latter cleaned. 
+    '''
 
     #  for the test - to be changed
     if len(text_file) == 0:
@@ -16,7 +21,10 @@ def clean(text_file):
     first_tbr = "\n"
 
 
-    '''this refers to each non alphabetical character (the ^ stands for a negation)'''
+    '''
+    this refers to each non alphabetical character (the ^ stands 
+    for a negation)
+    '''
 
     second_tbr = "[^a-z]"
 
@@ -64,9 +72,10 @@ def frequencies(text_file):
 def keys(sorted_freq_corpus, sorted_freq_cipher):
 
     '''
-
-    This function builds a key starting from the frequency of the corpus and of the cipher. It takes as input 2 lists, matches them in a dictionary and alphabetically orders keys to obtain the candidate decryption key of the encrypted text
-
+    This function builds a key starting from the frequency of the 
+    corpus and of the cipher. It takes as input 2 lists, matches 
+    them in a dictionary and alphabetically orders keys to obtain 
+    the candidate decryption key of the encrypted text
     '''
 
     if len(sorted_freq_corpus) >26 | len(sorted_freq_cipher) > 26:
@@ -91,9 +100,9 @@ def keys(sorted_freq_corpus, sorted_freq_cipher):
 def decryption(cipher_text, key):
 
     '''
-
-    The decryption function takes as input the encrypted text and the decryption key built above, returning the candidate plaintext.
-
+    The decryption function takes as input the encrypted text and 
+    the decryption key built above, returning the candidate 
+    plaintext.
     '''
 
     #I initialize an empty plaintext as base
@@ -120,6 +129,7 @@ def decryption(cipher_text, key):
                 break
 
     return plaintext
+
 
 def frequency_approach(corpus,cipher):
 
