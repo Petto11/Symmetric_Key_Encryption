@@ -1,6 +1,6 @@
 # importare i file
 import frequency
-import Bigram
+import bigram
 import argparse
 
 parser = argparse.ArgumentParser(description='Decrypts the text given as input')
