@@ -1,7 +1,12 @@
+# importing frequency module
 import frequency
+# importing math module for mathematical computing
 import math
+# module to work with complex iterators
 import itertools
+# importing hashlib module to hash messages 
 import hashlib
+# importing random module to be able to generate random numbers
 import random
 
 
@@ -9,7 +14,17 @@ import random
 
 def present_bigrams(text):
 
+    '''
+    The Present_bigram function, given as input a text, 
+    it returns a list containing all the bigrams of the text
+    as outputs.
+
+    present_bigrams("hello") --> [he, el, ll, lo]
+    '''
+
+    # correcting the text
     words = frequency.clean(text).split()
+    # creating the list
     bigrams = [ ]
 
     for word in words:
@@ -22,7 +37,18 @@ def present_bigrams(text):
 
     return bigrams
 
+
 def bigram_freq(text_file):
+
+    '''
+    The bigram_freq function takes as input a text and 
+    returns as output a dictionary containing as keys 
+    all the bigrams contained in the text, and as 
+    values a score assigned to each bigram.
+
+    bigram_freq("hello") --> {he:score0, el:score1, ll:score2, lo:score3}
+    '''
+
     # correcting the text
     words = frequency.clean(text_file).split() # creating the dictionary
     bigram_freq_dict = {}
@@ -50,6 +76,13 @@ def bigram_freq(text_file):
 # Score function
 
 def scoring(text,corpus_bg):
+
+    '''
+    The scoring function, given as input a text and the
+    “scoring board” built with the bigram_freq, puts back
+    as output the score of the text.
+    '''
+
     bg=present_bigrams(text)
     score=0
     for bigram in bg:
@@ -63,6 +96,13 @@ def scoring(text,corpus_bg):
 # Swapping characters
 
 def swap (string, first_char, second_char):
+
+    '''
+    We use the swap function to return, as an output
+    a swapped string of characters, starting from 2 
+    input: the initial string and the 2 characters 
+    that need to be exchangend
+    '''
     first_pos = None
     second_pos = None
 
@@ -90,6 +130,13 @@ def swap (string, first_char, second_char):
 # Permutations
 
 def Permute(key):
+    
+    '''
+    The Permute function, specified as input a key 
+    (a string containing the 26 characters of the 
+    alphabet), returns a list containing 325 
+    different versions of this key.
+    '''
     keys = []
     while(len(keys)<325):
         i = random.randrange(0, 26, 1)
@@ -106,7 +153,15 @@ def Permute(key):
 
 # Brute Froce Attack
 
-def brute_force(ciphertext, starting_key, corpus_bg, length,digest):
+def brute_force(ciphertext, starting_key, corpus_bg, length, digest):
+
+    '''
+    The brute_force function is a function aiming to send back
+    the right decrypted text (the candidate plaintext), through 
+    the exploitation of 5 inputs: an initial key, a ciphertext,
+    a specified number of attempts (length), a digest and the 
+    scoring board built with the bigram_freq function. 
+    '''
 
     candidate_plaintext = frequency.decryption(ciphertext, starting_key)
     max_score = scoring(candidate_plaintext, corpus_bg)
