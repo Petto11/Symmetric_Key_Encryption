@@ -1,6 +1,8 @@
 # importare i file
 import frequency_copia
 import Bigram_nuovo
+import frequency
+import bigram
 import argparse
 
 parser = argparse.ArgumentParser(description='Decrypts the text given as input')
@@ -17,6 +19,7 @@ cipher=str(args.text)
 with open (corpus_file, 'r') as f:
     corpus_text = f.read().lower()
 
+
 if type_control.file_type(cipher)==True:
     cipher_text = args.text.read()
     first_key,first_plaintext=frequency_copia.character_frequency(corpus_text,cipher_text)
@@ -28,5 +31,7 @@ if type_control.file_type(cipher)==True:
             print(Bigram_nuovo.brute_force(cipher_text,first_key, Bigram_nuovo.bigram_freq(corpus_text), args.length," "))
     elif args.brute!='Y':
         print(first_plaintext)
+if args.brute == 'Y':
+    print(bigram.brute_force(cipher_text,first_key, bigram.bigram_freq(corpus_text), args.length,digest_text))
 else:
     print('You must insert a .txt file, other formats are not accepted')
