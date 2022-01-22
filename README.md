@@ -61,7 +61,7 @@ Disclaimer: The statistical analysis on character frequency can be easily perfor
 
 A significant example of how a simple substitution algorithm can be defeated, and therefore get the ciphered message decrypted, is frequency.
 
-## Attack reproduction
+## 1.3 Attack reproduction
 Let’s try to grasp how it practically works by reproducing a symmetric key encryption attack!
 
 Eve is able to intercept the message that Alice sent to Bob, but the message is encrypted with a substitution algorithm. To discover the content of the plaintext Eve will perform statistical analysis on the character frequency and then, if this doesn’t work, pass to a brute force approach. In this reproduction the alphabet is known and it’s the English
