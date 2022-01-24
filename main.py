@@ -1,6 +1,5 @@
 # importare i file
-import frequency_copia
-import Bigram_nuovo
+
 import frequency
 import bigram
 import argparse
@@ -22,13 +21,13 @@ with open (corpus_file, 'r') as f:
 
 if type_control.file_type(cipher)==True:
     cipher_text = args.text.read()
-    first_key,first_plaintext=frequency_copia.character_frequency(corpus_text,cipher_text)
-    if len(frequency_copia.clean(cipher_text))<5000:
+    first_key,first_plaintext=frequency.frequency_approach(corpus_text,cipher_text)
+    if len(frequency.clean(cipher_text))<5000:
         print("Since the analysis made on the encrypted text is based on statystical properties of a language, the program will work only if the text to decrypt is at least 5000 characters long (numbers and punctuation excluded)")
     elif args.brute == 'Y'
-        print(Bigram_nuovo.brute_force(cipher_text,first_key, Bigram_nuovo.bigram_freq(corpus_text), args.length,digest_text))
+        print(bigram.brute_force(cipher_text,first_key, bigram.bigram_freq(corpus_text), args.length,digest_text))
         else:
-            print(Bigram_nuovo.brute_force(cipher_text,first_key, Bigram_nuovo.bigram_freq(corpus_text), args.length," "))
+            print(bigram.brute_force(cipher_text,first_key, bigram.bigram_freq(corpus_text), args.length," "))
     elif args.brute!='Y':
         print(first_plaintext)
 if args.brute == 'Y':
