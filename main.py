@@ -25,6 +25,7 @@ with open(corpus_file, 'r') as f:
 
 if type_control.file_type(cipher):
     cipher_text = args.text.read()
+
     first_key, first_plaintext =
     frequency.frequency_approach(corpus_text,
                                   cipher_text)
@@ -44,6 +45,14 @@ if type_control.file_type(cipher):
                                      bigram.bigram_freq(corpus_text),
                                      args.length, " "))
     elif args.brute != 'Y':
+    first_key,first_plaintext=frequency.frequency_approach(corpus_text,cipher_text)
+    if len(frequency.clean(cipher_text))<5000:
+        print("Since the analysis made on the encrypted text is based on statystical properties of a language, the program will work only if the text to decrypt is at least 5000 characters long (numbers and punctuation excluded)")
+    elif args.brute == 'Y'
+        print(bigram.brute_force(cipher_text,first_key, bigram.bigram_freq(corpus_text), args.length,digest_text))
+        else:
+            print(bigram.brute_force(cipher_text,first_key, bigram.bigram_freq(corpus_text), args.length," "))
+    elif args.brute!='Y':
         print(first_plaintext)
 if args.brute == 'Y':
     print(bigram.brute_force(cipher_text,
