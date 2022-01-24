@@ -110,23 +110,104 @@ git clone https://github.com/Petto11/Symmetric_Key_Encryption
 
 This will automatically download all the files the user needs to run the program.
 
-### 3.1 Functions
+### 3.2 Functions
 
 In order to develop a suitable structure for our project according to the intended goals, we created 3 main functions and stored them into different modules:
 
-- main.py
 - frequency.py
 - bigram.py
+- main.py
 
-We then added one function to check the test file, da qua in poi dobbiamo aggiungere e mettere a posto raga. 
 
-Mancherebbe da aggiungere un esempio di come si usa la funzione che lo vuole anche nel readme, e di come funzia argparse etc 
+We then added one function to check the test file
 
-Poi non serve che lo rimettiamo nel report 
+#### 3.2.1 frequencies.py
 
-Ne parliamo in call
+This module contains several functions which help us decrypting a text using the frequency approach explained above:
 
-Poi nel report mancano le cose che non vanno qua e che magari accenniamo e basta, tipo la licenza, ma di cui parliamo meglio nel report, test development process, e come runnare la test suite 
+* We start with the **clean** function takes as input a text and outputs the latter cleaned, removing all numbers and punctuations. 
+
+* We then continue with the **frequencies** function, which given as input a text, returns a dictionary which has as keys the different characters in the text and as values the number of time the character appears in the text. 
+
+* Then we created the **keys** function which given as input the frequency of the corpus and the frequency of the cipher text.
+
+* We can finally complete the frequencies approach with the **decryption** function which returns the decrypted text taking as input the ciphertext and the key.
+
+We also added the **frequency_approach** function which takes as input the 2 texts and returns the first plaintext and the decryption key. It basically unifies the *decryption* and *keys* functions.
+
+After matching the frequencies of the corpus with the one of the ciphertext we computed a decrpytion key and hence a partially decoded text, which however was still far from perfection.
+
+To complete the process we must pass to the brute force (or bigram) approach
+
+#### 3.2.2 bigram.py
+
+This module contains several functions which help us decrypting a text using the bigram approach explained above:
+
+* We start with the most basic part of the process and we create the this  **present_bigrams** function, which takes as input a text and returns as outputs a list containing all the bigrams of the text.
+
+* To compare different texts we needed a scoreboard as a reference, so to do this we implemented the **bigram_freq** function, which takes as input a text and returns a dictionary containing as keys all the bigrams contained in the text, and as values a score assigned to each bigram. (The score is calculated by making the logarithm in base 10 of the bigram’s frequency)
+
+* As explained before, we needed a quantitative measure to compare different candidate plaintext. To compute the score of each candidate plaintext we built this function called scoring, which takes as input a text and the “scoring board” built with the bigram_freq function, and returns as output the score of the text.
+
+* To improve the score given by our key, we built this function called random_Permute, which takes as input a key and returns all the possible 325 versions of the latter
+
+* To swap 2 random characters in the key we used the **swap** function which takes as input one string and the two characters that need to be exchanged, and as it is easy to guess, it outputs the new “swapped” string.
+
+Now we can finally complete the process with the **Brute force** function,  in charge of checking all possible keys until it finds the right one. To avoid making too many computations and keep the process pretty easy to run, we limited the amount of attempts to 10.
+
+#### 3.2.3 main.py
+In the file to execute we have different argparse parameters:
+
+* Text 
+
+This is a position argument in which the user has to specify the text to be decrypted. The user has to insert the path of the .txt file or simply the name if it's in the same folder of the main.py file
+``` bash
+python main.py -text "Ciphertext.txt"
+``` 
+In this example the software will try to decrypt the Ciphertext.txt file
+
+* Length
+
+This is an optional numerical argument through the which the user can decide the number of characters to be printed from the candidate plaintext.
+
+``` bash
+python main.py -text "Ciphertext.txt" --length 1000
+``` 
+In this example the software will try to decrypt the Ciphertext.txt file and will print out the first 1000 of the candidate plaintext.
+If the user does not specify anything the software will print out the whole candidate plaintext.
+
+* Brute
+
+This is an optional text argument through which the user can decide if he wants to decrypt the text using only the frequency approach or also using the brute force approach.
+
+If to the parameter is given as input 'Y' the software will use the brute force approach, otherwise it will simply use the frequency one
+
+``` bash
+python main.py -text "Ciphertext.txt" --length 1000 --brute 'Y'
+``` 
+
+In this example the software will apply the brute force approach to the "Cipertext.txt" file and it will print out the first 1000 characters of the candidate plaintext. 
+
+---
+
+In the executable file we also added a checker for the type of the file given as input to the "text" positional argument. Since our program allows only .txt files, any other fyle-type will make the program stop and return an error message:
+
+```pyhton
+"You must insert a .txt file, other formats are not accepted"
+```
+
+---
+
+To decrypt a text using statistica properties of character frequency the **cleaned** text (without numbers and punctuations) must be long at least 5000 characters, since those properties are not maintained by short texts. If the text is shorter than 5000 characters, the program will return an error message: 
+
+
+```pyhton
+"Since the analysis made on the encrypted text is based on 
+statystical properties of a language, the program will work 
+only if the text to decrypt is at least 5000 characters long 
+(numbers and punctuation excluded)"
+```
+
 
 
 ## Contributing
@@ -145,4 +226,3 @@ Diana Lorenzo
 Scatto Giacomo
 Vian Nicolo'
 Volpato Pietro  
-
