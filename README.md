@@ -77,7 +77,7 @@ At this point, Eve will match the most frequent letter of the corpus with the mo
 use to decrypt the ciphered text.
 The plaintext Eve will obtain might not be 100% correct since the assumption we are relying on in this initial part of the attack are very strong. At this stage of the process eve can manually adjust the key and correct the errors made by the frequency analysis or pass to a brute force approach.
 
-## 2.1 Brute force attack
+## 2 Brute force attack
 
 What Eve can do if the initial key is not correct is trying to guess it through a Brute Force Attack. 
 
@@ -188,6 +188,17 @@ python main.py -text "Ciphertext.txt" --length 1000 --brute 'Y'
 
 In this example the software will apply the brute force approach to the "Cipertext.txt" file and it will print out the first 1000 characters of the candidate plaintext. 
 
+* Digest
+
+If the user has the digest of the original message he can insert It in this optional file argument, and the software will print out the final result only if the digest of the candidate plaintext matches the original digest (or after 10 attempts)
+
+``` bash
+python main.py -text "Ciphertext.txt" --length 1000 
+--brute 'Y' --digest "digest.txt"
+```
+In this example the software will apply the brute force approach to the "Cipertext.txt" file and it will print out the first 1000 characters of the candidate plaintext only if the digest of the latter is equal to "digest.txt" (or after 10 attempts)
+
+
 ---
 
 In the executable file we also added a checker for the type of the file given as input to the "text" positional argument. Since our program allows only .txt files, any other fyle-type will make the program stop and return an error message:
@@ -207,7 +218,48 @@ statystical properties of a language, the program will work
 only if the text to decrypt is at least 5000 characters long 
 (numbers and punctuation excluded)"
 ```
+## 4 Usage Example
+In the *resources* folder we included some material that can be used to better understand how the software works and have an example with a real cipher text. 
 
+The corpus through which we will build our scoreboard is formed by some books written by Lev Tolstoj, while the cipher is another Tolstoj book encrypted with a symmetric encryption key. 
+
+### 4.1 How to use the given material
+```Bash
+python main.py -text resources/ciphertext.txt --length 1000
+``` 
+In this case the software will decrypt the cipher text using only the frequency approach and printing the 1st 1000 characters of the plaintext. The result obtained will be:
+```python
+"some tihrtp pears ago ferayntov, bp alytpwis advhwe, iad bougit a
+cood from tie yrhnwe, iad begun to trade, and noc iad a iouse, an
+hnn, and a worn dealers sioy hn tiat yrovhnwe. ie cas a stout, dark,
+red-fawed yeasant hn tie forthes, chti tihwk lhys, a broad knob of a
+nose, shmhlar knobs over ihs blawk frocnhng brocs, and a round bellp"
+```
+Obviously this result is not good enough, so the user can try to decrypt the message using the brute force approach and the digest given in the resources folder. 
+
+#### 4.1.1 Brute force approach
+
+Recall: the digest is used to check if our candidate plaintext corresponds exactly to the original message sent by Alice. If the digest of the candidate plaintext and of the original message match, we are sure that our decryption is correct. 
+```Bash
+python main.py -text resources/ciphertext.txt --length 1000 --brute 'Y'
+ --digest resources/sha256sum.txt
+``` 
+In this case the software will try the brute force approach on the "ciphertext.txt" file , print the 1st 1000 characters of the candidate plaintext and print the results only if the 2 digests match or after 10 attempts. The result will be this one (scores might change):
+```python
+"Score of the attempt number 1 : -1784"
+.
+.
+.
+"Score of the attempt number n : -1650"
+
+"Found! Here's the original text:"
+
+"some thirty years ago ferapntov, by alptychs advice, had bought a
+wood from the prince, had begun to trade, and now had a house, an
+inn, and a corn dealers shop in that province. he was a stout, dark,
+red-faced peasant in the forties, with thick lips, a broad knob of a
+nose, similar knobs over his black frowning brows, and a round belly".
+```
 
 
 ## Contributing
@@ -217,12 +269,12 @@ Please contact us if you wish to implement significant changes and test them bef
 
 ## License
 
-Da mettere il nome della licenza
-
+GNU Public license
 
 ## Developers
-Cortesia Leonardo
-Diana Lorenzo 
-Scatto Giacomo
-Vian Nicolo'
-Volpato Pietro  
+Cortesia Leonardo - 
+Diana Lorenzo - 878664
+Scatto Giacomo - 878819
+Vian Nicolo' - 879914
+Volpato Pietro - 879528
+
