@@ -77,7 +77,7 @@ def keys(sorted_freq_corpus, sorted_freq_cipher):
     the candidate decryption key of the encrypted text
     '''
 
-    if len(sorted_freq_corpus) > 26 | len(sorted_freq_cipher) > 26:
+    if len(sorted_freq_corpus) != 26 or len(sorted_freq_cipher) != 26:
         return None
 
     alphabet = string.ascii_lowercase
