@@ -203,7 +203,7 @@ In this example the software will apply the brute force approach to the "Ciperte
 
 In the executable file we also added a checker for the type of the file given as input to the "text" positional argument. Since our program allows only .txt files, any other fyle-type will make the program stop and return an error message:
 
-```pyhton
+```Bash
 "You must insert a .txt file, other formats are not accepted"
 ```
 
@@ -212,7 +212,7 @@ In the executable file we also added a checker for the type of the file given as
 To decrypt a text using statistica properties of character frequency the **cleaned** text (without numbers and punctuations) must be long at least 5000 characters, since those properties are not maintained by short texts. If the text is shorter than 5000 characters, the program will return an error message: 
 
 
-```pyhton
+```Bash
 "Since the analysis made on the encrypted text is based on 
 statystical properties of a language, the program will work 
 only if the text to decrypt is at least 5000 characters long 
@@ -228,7 +228,7 @@ The corpus through which we will build our scoreboard is formed by some books wr
 python main.py -text resources/ciphertext.txt --length 1000
 ``` 
 In this case the software will decrypt the cipher text using only the frequency approach and printing the 1st 1000 characters of the plaintext. The result obtained will be:
-```python
+```Bash
 "some tihrtp pears ago ferayntov, bp alytpwis advhwe, iad bougit a
 cood from tie yrhnwe, iad begun to trade, and noc iad a iouse, an
 hnn, and a worn dealers sioy hn tiat yrovhnwe. ie cas a stout, dark,
@@ -245,7 +245,7 @@ python main.py -text resources/ciphertext.txt --length 1000 --brute 'Y'
  --digest resources/sha256sum.txt
 ``` 
 In this case the software will try the brute force approach on the "ciphertext.txt" file , print the 1st 1000 characters of the candidate plaintext and print the results only if the 2 digests match or after 10 attempts. The result will be this one (scores might change):
-```python
+```Βash
 "Score of the attempt number 1 : -1784"
 .
 .
